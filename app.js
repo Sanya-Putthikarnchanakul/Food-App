@@ -58,27 +58,6 @@ app.use(async (err, req, res, next) => {
 	});
 });
 
-//#region mock
-/*
-const bcrypt = require("bcryptjs");
-const User = require('./models/user');
-
-app.post('/add-user', express.json(), async (req, res) => {
-    const hashPassword = await bcrypt.hash(req.body.password, 12);
-
-    const user = new User({
-        username: req.body.username,
-        password: hashPassword,
-        role: req.body.role
-    });
-
-    const newUser = await user.save();
-
-    res.json(newUser);
-});
-*/
-//#endregion
-
 //#endregion
 
 //#region start server
