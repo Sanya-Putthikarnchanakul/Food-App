@@ -1,0 +1,41 @@
+#left-panel {
+    padding-top: 0;
+}
+
+#user-account-image {
+    padding: 2px;
+    border: 1px solid #c0bbb7;
+    background-color: #f2f2f2;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+    border-left: 3px solid #40ac2b;
+}
+
+.login-container {
+    height: 100vh;
+}
+
+.login-box {
+    width: 25%;
+    min-width: 300px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.login-info span a i {
+    margin-left: 3px;
+}
+
+.popover {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+}
+
+.popover-title {
+    color: black;
+}

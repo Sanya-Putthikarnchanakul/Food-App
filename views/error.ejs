@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+    <title>
+        <%= pageTitle %>
+    </title>
+    <meta name="description" content="food shop management web application" />
+    <meta name="author" content="Sanya P." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production-plugins.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-production.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/smartadmin-skins.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" />
+    <style>
+        #content {
+            height: 100vh;
+        }
+
+        .error-box {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content">
+        <div class="text-center error-box">
+            <h1 class="error-text tada animated"><i class="fa fa-times-circle text-danger error-icon-shadow"></i> Error</h1>
+            <h2 class="font-xl"><strong>Oooops, Something went wrong!</strong></h2>
+            <br />
+            <p class="lead semi-bold">
+                <strong>You have experienced a technical error. We apologize.</strong><br><br>
+                <small>
+                    We are working hard to correct this issue. Please wait a few moments and try your search again.
+                </small>
+            </p>
+            <ul class="error-search text-left font-md">
+                <li><a href="/"><small>Go to My Dashboard <i class="fa fa-arrow-right"></i></small></a></li>
+                <li><a href="javascript:history.go(-1);"><small>Go back</small></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/js/libs/jquery-2.1.1.min.js"></script>
+    <script src="/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/js/app.config.js"></script>
+    <script src="/js/app.min.js"></script>
+</body>
+
+</html>

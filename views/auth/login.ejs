@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+    <title>
+        <%= pageTitle %>
+    </title>
+    
+    <%- include('../includes/main-header.ejs') %>
+</head>
+
+<body class="animated fadeInDown">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="well no-padding" style="width:100%;">
+                <form action="/auth/login" method="post" class="smart-form client-form" id="login-form">
+                    <header>Login</header>                   
+                    <fieldset>
+                        <% if (mainError) { %>
+                            <div class="alert alert-danger fade in">
+                                <button class="close" data-dismiss="alert">×</button>
+                                <i class="fa-fw fa fa-times"></i>
+                                <%= mainError %>
+                            </div>
+                        <% } %>
+                        <section>
+                            <label class="label">Username</label>
+                            <label class="<%= validationErrors.find(e => e.param === 'username') ? 'input state-error' : 'input' %>">
+                                <i class="icon-prepend fa fa-user"></i>
+                                <input type="text" name="username" value="<%= initInput.username %>"/>
+                                <b class="tooltip tooltip-top-left">
+                                    <i class="fa fa-user txt-color-teal"></i> Please Enter Username
+                                </b>                               
+                            </label>
+                            <em for="name" class="<%= validationErrors.find(e => e.param === 'username') ? 'invalid' : '' %>">
+                                <%= validationErrors.find(e => e.param === 'username') ? validationErrors.find(e => e.param === 'username').msg : '' %>
+                            </em>
+                        </section>
+                        <section>
+                            <label class="label">Password</label>
+                            <label class="<%= validationErrors.find(e => e.param === 'password') ? 'input state-error' : 'input' %>">
+                                <i class="icon-prepend fa fa-lock"></i>
+                                <input type="password" name="password" value="<%= initInput.password %>"/>
+                                <b class="tooltip tooltip-top-left">
+                                    <i class="fa fa-lock txt-color-teal"></i> Please Enter Password
+                                </b>
+                            </label>
+                            <em for="password" class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>">
+                                <%= validationErrors.find(e => e.param === 'password') ? validationErrors.find(e => e.param === 'password').msg : '' %>
+                            </em>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </footer>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../includes/main-footer.ejs') %>
+    
+    <script type="text/javascript">
+        runAllForms();
+
+        $(function () {
+            pageSetUp();
+
+            $("#login-form").validate({
+                rules: {
+                    username: {
+                        required : true,
+                        minlength : 5,
+						maxlength : 20
+                    },
+                    password: {
+                        required : true,
+                        minlength : 5,
+						maxlength : 20
+                    }
+                },
+                messages : {
+                    username : {
+                        required : 'Username is Required',
+                        minlength : 'Username must be at least 5 characters',
+                        maxlength: 'Username must be maximum 20 characters'
+                    },
+                    password : {
+                        required : 'Password is Required',
+                        minlength : 'Password must be at least 5 characters',
+                        maxlength: 'Password must be maximum 20 characters'
+                    }
+                },
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<aside id="left-panel">
+    <div class="login-info">
+        <span>              
+            <a href="javascript:void(0);" rel="popover" data-placement="bottom" data-original-title="<i class='fa fa-fw fa-pencil'></i> Action" data-content="<form action='/auth/logout' method='post'><button type='submit' class='btn btn-danger' style='width:85%;'>Logout</button></form>" data-html="true">
+                <span class="online" id="user-account-image"><i class="fa fa-user"></i></span>
+                <span>admin</span>
+                <i class="fa fa-angle-down"></i>
+            </a>             
+        </span>
+    </div>
+    <nav>
+        <ul>
+            <li class="<%= path === '/dashboard' ? 'active' : '' %>">
+                <a href="/dashboard" title="Dashboard">
+                    <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu"> 
+        <i class="fa fa-arrow-circle-left hit"></i> 
+    </span>
+</aside>
