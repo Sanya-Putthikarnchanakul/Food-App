@@ -66,13 +66,34 @@ exports.postLogin = async (req, res, next) => {
             });
         }
 
-        req.session.userId = queryUser._id;
-        req.session.save(err => {
-			if (err) console.log(`[POST] /auth/login error => ${err}`);
-			res.redirect('/dashboard');
+        req.session.user = queryUser;
+        req.session.save(async (err) => {
+			if (err) {
+                const log = new ErrorLog({ path: '[POST] /auth/login', errMessage: err.message, errStack: err.stack });
+                await log.save();
+            }
+
+			if (queryUser.role === 'admin') res.redirect('/dashboard');
+            else res.redirect('/shop');
 		});
     } catch (err) {         
         const log = new ErrorLog({ path: '[POST] /auth/login', errMessage: err.message, errStack: err.stack });
+        await log.save();
+        next(err);
+    }
+}
+
+exports.getLogout = async (req, res, next) => {
+    try {
+        const userSession = req.session.user;
+
+        req.session.destroy(err => {		
+            if (err) throw err;
+    
+            res.redirect('/auth/login');
+        });
+    } catch (err) {
+        const log = new ErrorLog({ path: '[GET] /auth/logout', errMessage: err.message, errStack: err.stack, createdBy: userSession });
         await log.save();
         next(err);
     }

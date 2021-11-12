@@ -1,20 +1,44 @@
 <aside id="left-panel">
     <div class="login-info">
         <span>              
-            <a href="javascript:void(0);" rel="popover" data-placement="bottom" data-original-title="<i class='fa fa-fw fa-pencil'></i> Action" data-content="<form action='/auth/logout' method='post'><button type='submit' class='btn btn-danger' style='width:85%;'>Logout</button></form>" data-html="true">
+            <a href="javascript:void(0);" rel="popover" data-placement="bottom" data-content="<a href='/auth/logout' class='btn btn-danger' style='width:85%;color:#fff;'>Logout</a>" data-html="true">
                 <span class="online" id="user-account-image"><i class="fa fa-user"></i></span>
-                <span>admin</span>
+                <span><%= user.username %></span>
                 <i class="fa fa-angle-down"></i>
             </a>             
         </span>
     </div>
     <nav>
         <ul>
-            <li class="<%= path === '/dashboard' ? 'active' : '' %>">
-                <a href="/dashboard" title="Dashboard">
-                    <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span>
-                </a>
-            </li>
+            <% if (user.role === 'admin') { %>
+                <li class="<%= path === '/dashboard' ? 'active' : '' %>">
+                    <a href="/dashboard" title="Dashboard">
+                        <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span>
+                    </a>
+                </li>
+            <% } %>
+
+            <% if (user.role === 'admin') { %>
+                <li class="<%= path.includes('/user-management') ? 'active' : '' %>">
+                    <a href="#"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">User Management</span></a>
+                    <ul>
+                        <li class="<%= path === '/user-management/all-user' ? 'active' : '' %>">
+                            <a href="/user-management/all-user">All User</a>
+                        </li>
+                        <li class="<%= path === '/user-management/add-user' ? 'active' : '' %>">
+                            <a href="/user-management/add-user">Add User</a>
+                        </li>
+                    </ul>
+                </li>
+            <% } %>
+
+            <% if (user.role === 'user') { %>
+                <li class="<%= path === '/shop' ? 'active' : '' %>">
+                    <a href="/shop" title="Shop">
+                        <i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Shop</span>
+                    </a>
+                </li>
+            <% } %>
         </ul>
     </nav>
     <span class="minifyme" data-action="minifyMenu"> 

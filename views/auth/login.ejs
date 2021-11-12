@@ -26,9 +26,9 @@
                         <section>
                             <label class="label">Username</label>
                             <label class="<%= validationErrors.find(e => e.param === 'username') ? 'input state-error' : 'input' %>">
-                                <i class="icon-prepend fa fa-user"></i>
+                                <i class="icon-append fa fa-user"></i>
                                 <input type="text" name="username" value="<%= initInput.username %>"/>
-                                <b class="tooltip tooltip-top-left">
+                                <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-user txt-color-teal"></i> Please Enter Username
                                 </b>                               
                             </label>
@@ -39,9 +39,9 @@
                         <section>
                             <label class="label">Password</label>
                             <label class="<%= validationErrors.find(e => e.param === 'password') ? 'input state-error' : 'input' %>">
-                                <i class="icon-prepend fa fa-lock"></i>
+                                <i class="icon-append fa fa-lock"></i>
                                 <input type="password" name="password" value="<%= initInput.password %>"/>
-                                <b class="tooltip tooltip-top-left">
+                                <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Please Enter Password
                                 </b>
                             </label>

@@ -7,8 +7,8 @@ const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
 
-//const MONGODB_URI = "mongodb://localhost:27017/food";
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.58bzs.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
+const MONGODB_URI = "mongodb://localhost:27017/food";
+//const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.58bzs.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
 //#endregion
 
@@ -25,7 +25,7 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 app.use(
 	session({
-		cookie: { maxAge: 1000 * 60 * 60 * 15 },
+		cookie: { maxAge: 1000 * 60 * 30 },
 		secret: "Sanya220931",
 		resave: false,
 		saveUninitialized: false,

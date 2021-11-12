@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>
+        <%= pageTitle %>
+    </title>
+    
+    <%- include('../includes/main-header.ejs') %>
+</head>
+
+<body>
+
+    <%- include('../includes/left-navigation.ejs') %>
+
+    <div id="main" role="main">      
+        
+        <%- include('../includes/ribbon.ejs') %>
+
+        <div id="content">
+            <section id="widget-grid">
+                <div class="row">                   
+                    <article class="col-md-12 col-lg-6">
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-sortable="false">
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-plus-square-o"></i> </span>
+								<h2>Add User</h2>
+                            </header>
+                            <div>
+                                <div class="widget-body no-padding">
+                                    <form id="add-user-form" class="smart-form" novalidate="novalidate" action="/user-management/add-user" method="post">                                       
+                                        <fieldset>
+                                            <% if (mainError) { %>
+                                                <div class="alert alert-danger fade in">
+                                                    <button class="close" data-dismiss="alert">×</button>
+                                                    <i class="fa-fw fa fa-times"></i>
+                                                    <%= mainError %>
+                                                </div>
+                                            <% } %>
+                                            <div class="row">
+                                                <section class="col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="label">Username</label>
+                                                    <label class="<%= validations.find(e => e.param === 'username') ? 'input state-error' : 'input' %>"> 
+                                                        <i class="icon-append fa fa-user"></i>
+                                                        <input type="text" name="username" value="<%= input.username %>">
+                                                        <b class="tooltip tooltip-top-right">
+                                                            <i class="fa fa-warning txt-color-teal"></i> Enter Username
+                                                        </b> 
+                                                    </label>
+                                                    <em class="<%= validations.find(e => e.param === 'username') ? 'invalid' : '' %>">
+                                                        <%= validations.find(e => e.param === 'username') ? validations.find(e => e.param === 'username').msg : '' %>
+                                                    </em>
+                                                    <div class="note">
+														<strong>Username</strong> is required and between 5 - 20 characters
+													</div>
+                                                    <label class="label" style="margin-top:10px;">Password</label>
+                                                    <label class="<%= validations.find(e => e.param === 'password') ? 'input state-error' : 'input' %>"> 
+                                                        <i class="icon-append fa fa-lock"></i>
+                                                        <input type="password" name="password" id="password" value="<%= input.password %>">
+                                                        <b class="tooltip tooltip-top-right">
+                                                            <i class="fa fa-warning txt-color-teal"></i> Enter Password
+                                                        </b> 
+                                                    </label>
+                                                    <em class="<%= validations.find(e => e.param === 'password') ? 'invalid' : '' %>">
+                                                        <%= validations.find(e => e.param === 'password') ? validations.find(e => e.param === 'password').msg : '' %>
+                                                    </em>
+                                                    <div class="note">
+														<strong>Password</strong> is required and between 5 - 20 characters
+													</div>
+                                                    <label class="label" style="margin-top:10px;">Confirm Password</label>
+                                                    <label class="<%= validations.find(e => e.param === 'confirmPassword') ? 'input state-error' : 'input' %>"> 
+                                                        <i class="icon-append fa fa-lock"></i>
+                                                        <input type="password" name="confirmPassword" value="<%= input.confirmPassword %>">
+                                                        <b class="tooltip tooltip-top-right">
+                                                            <i class="fa fa-warning txt-color-teal"></i> Enter Confirm Password
+                                                        </b> 
+                                                    </label>
+                                                    <em class="<%= validations.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>">
+                                                        <%= validations.find(e => e.param === 'confirmPassword') ? validations.find(e => e.param === 'confirmPassword').msg : '' %>
+                                                    </em>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                        <footer>
+                                            <button type="submit" class="btn btn-primary pull-left">Add</button>
+                                        </footer>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </article>                
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <%- include('../includes/main-footer.ejs') %>
+
+    <script type="text/javascript">
+        $(function () {
+            pageSetUp();
+
+            $('#add-user-form').validate({
+                rules: {
+                    username: {
+                        required : true,
+                        minlength : 5,
+						maxlength : 20
+                    },
+                    password: {
+                        required : true,
+                        minlength : 5,
+						maxlength : 20
+                    },
+                    confirmPassword: {
+                        required : true,
+                        minlength : 5,
+						maxlength : 20,
+                        equalTo : '#password'
+                    }
+                },
+                messages: {
+                    username : {
+                        required : 'Username is Required',
+                        minlength : 'Username must be at least 5 characters',
+                        maxlength: 'Username must be maximum 20 characters'
+                    },
+                    password : {
+                        required : 'Password is Required',
+                        minlength : 'Password must be at least 5 characters',
+                        maxlength: 'Password must be maximum 20 characters'
+                    },
+                    confirmPassword: {
+                        required : 'Confirm Password is Required',
+                        minlength : 'Confirm Password must be at least 5 characters',
+                        maxlength: 'Confirm Password must be maximum 20 characters',
+                        equalTo: 'Password and Confirm Password not Match'
+                    }
+                },
+                errorPlacement : function(error, element) {
+					error.insertAfter(element.parent());
+				}
+            });
+        });
+    </script>
+</body>
+
+</html>

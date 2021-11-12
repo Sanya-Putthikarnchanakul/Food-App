@@ -1,15 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-//#region controllers
-
 const indexController = require('../controllers/indexController');
 
 const { isAuth } = require('../utils/authUtil');
-
-//#endregion
-
-//#region map routes
+const { postAddUserValidation } = require('../validations/index/postAddUserValidation');
 
 //#region mock
 /*
@@ -34,7 +29,9 @@ router.post('/api/add-user', express.json(), async (req, res) => {
 
 router.get('/', isAuth, (req, res) => res.redirect('/dashboard'));
 router.get('/dashboard', isAuth, indexController.getDashboard);
-
-//#endregion
+router.get('/shop', isAuth, indexController.getShop);
+router.get('/user-management/all-user', isAuth, indexController.getAllUser);
+router.get('/user-management/add-user', isAuth, indexController.getAddUser);
+router.post('/user-management/add-user', isAuth, postAddUserValidation(), indexController.postAddUser);
 
 module.exports = router;

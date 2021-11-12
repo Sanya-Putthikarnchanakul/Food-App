@@ -15,7 +15,9 @@ const errorLogSchema = new Schema({
 		required: true
 	},
     createdBy: {
-        type: String,
+        type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: false,
 		default: null
     }
 }, { timestamps: true });

@@ -1,0 +1,12 @@
+<div id="ribbon">
+    <span class="ribbon-button-alignment" style="color:#fff;margin-right:5px;">
+        <% if (path === '/dashboard') { %><i class="fa-lg fa fa-home"></i><% } %>
+        <% if (path === '/shop') { %><i class="fa-lg fa fa-shopping-cart"></i><% } %>
+        <% if (path === '/user-management/add-user') { %><i class="fa-lg fa fa-user"></i><% } %>
+    </span>            
+    <ol class="breadcrumb">
+        <% ribbons.forEach(text => { %>
+            <li><%= text %></li>
+        <% }) %>
+    </ol>
+</div>

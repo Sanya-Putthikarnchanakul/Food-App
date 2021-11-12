@@ -1,19 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-//#region controllers
-
 const authController = require('../controllers/authController');
 
-//#endregion
-
-//#region 
-
 const { postLoginValidation } = require('../validations/auth/postLoginValidation');
-
-//#endregion
-
-//#region map routes
+const { isAuth } = require('../utils/authUtil');
 
 router.get(
     '/login', 
@@ -24,7 +15,6 @@ router.get(
     authController.getLogin
 );
 router.post('/login', postLoginValidation(), authController.postLogin);
-
-//#endregion
+router.get('/logout', isAuth, authController.getLogout);
 
 module.exports = router;

@@ -2,6 +2,10 @@
     padding-top: 0;
 }
 
+#main {
+    padding-top: 0;
+}
+
 #user-account-image {
     padding: 2px;
     border: 1px solid #c0bbb7;
