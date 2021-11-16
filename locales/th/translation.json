@@ -1,0 +1,26 @@
+{
+    "includes": {
+        "leftNavigation": {
+            "logout": "ออกจากระบบ",
+            "dashboardMenu": "สรุป",
+            "usermanagementMenu": "จัดการพนักงาน",
+            "allUserMenu": "พนักงานทั้งหมด",
+            "addUserMenu": "เพิ่มพนักงาน"
+        }
+    },
+    "auth": {
+        "login": {
+            "pageTitle": "เข้าสู่ระบบ",
+            "usernameTitle": "ชื่อผู้ใช้",
+            "passwordTitle": "รหัสผ่าน",
+            "usernamePopOver": "กรุณาระบุชื่อผู้ใช้",
+            "passwordPopOver": "กรุณาระบุรหัสผ่าน",
+            "alertError": "ลงชื่อเข้าใช้ล้มเหลว"
+        }
+    },
+    "index": {
+        "dashboard": {
+            "pageTitle": "สรุป"
+        }
+    }
+}

@@ -9,7 +9,6 @@ exports.getDashboard = async (req, res, next) => {
         const userSession = req.session.user;
 
         res.render('index/dashboard', {
-            pageTitle: 'Dashboard',
             path: '/dashboard',
             ribbons: ['Dasboard'],
             user: userSession

@@ -1,0 +1,26 @@
+{
+    "includes": {
+        "leftNavigation": {
+            "logout": "Logout",
+            "dashboardMenu": "Dashboard",
+            "usermanagementMenu": "User Management",
+            "allUserMenu": "All User",
+            "addUserMenu": "Add User"
+        }
+    },
+    "auth": {
+        "login": {
+            "pageTitle": "Login",
+            "usernameTitle": "Username",
+            "passwordTitle": "Password",
+            "usernamePopOver": "Please Enter Username",
+            "passwordPopOver": "Please Enter Password",
+            "alertError": "Login Failed"
+        }
+    },
+    "index": {
+        "dashboard": {
+            "pageTitle": "Dashboard"
+        }
+    } 
+}

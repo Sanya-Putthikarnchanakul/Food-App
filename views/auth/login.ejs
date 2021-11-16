@@ -2,9 +2,7 @@
 <html lang="en-us" id="extr-page">
 
 <head>
-    <title>
-        <%= pageTitle %>
-    </title>
+    <title><%= t('auth.login.pageTitle') %></title>
     
     <%- include('../includes/main-header.ejs') %>
 </head>
@@ -13,8 +11,8 @@
     <div class="login-container">
         <div class="login-box">
             <div class="well no-padding" style="width:100%;">
-                <form action="/auth/login" method="post" class="smart-form client-form" id="login-form">
-                    <header>Login</header>                   
+                <form action="/auth/login?lng=<%= language %>" method="post" class="smart-form client-form" id="login-form">
+                    <header><%= t('auth.login.pageTitle') %></header>                   
                     <fieldset>
                         <% if (mainError) { %>
                             <div class="alert alert-danger fade in">
@@ -24,34 +22,59 @@
                             </div>
                         <% } %>
                         <section>
-                            <label class="label">Username</label>
-                            <label class="<%= validationErrors.find(e => e.param === 'username') ? 'input state-error' : 'input' %>">
+                            <ul class="pull-right" style="list-style:none;">
+                                <li>
+                                    <% if(language === 'en') { %>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                                            <img src="/img/blank.gif" class="flag flag-us" alt=""> 
+                                            <span> EN </span> <i class="fa fa-angle-down"></i> 
+                                        </a>
+                                    <% } else { %>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+                                            <img src="/img/blank.gif" class="flag flag-th" alt="Thailand"> 
+                                            <span> TH </span> <i class="fa fa-angle-down"></i> 
+                                        </a>
+                                    <% } %>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li class="<%= (language === 'en') ? 'active' : '' %>">
+                                            <a href="/auth/login?lng=en"><img src="/img/blank.gif" class="flag flag-us" alt="EN">EN</a>
+                                        </li>
+                                        <li class="<%= language === 'th' ? 'active' : '' %>">
+                                            <a href="/auth/login?lng=th"><img src="/img/blank.gif" class="flag flag-th" alt="TH">TH</a>
+                                        </li>                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                        <section>
+                            <label class="label"><%= t('auth.login.usernameTitle') %></label>
+                            <label class="<%= validations.find(e => e.param === 'username') ? 'input state-error' : 'input' %>">
                                 <i class="icon-append fa fa-user"></i>
                                 <input type="text" name="username" value="<%= initInput.username %>"/>
                                 <b class="tooltip tooltip-top-right">
-                                    <i class="fa fa-user txt-color-teal"></i> Please Enter Username
+                                    <i class="fa fa-user txt-color-teal"></i> <%= t('auth.login.usernamePopOver') %>
                                 </b>                               
                             </label>
-                            <em for="name" class="<%= validationErrors.find(e => e.param === 'username') ? 'invalid' : '' %>">
-                                <%= validationErrors.find(e => e.param === 'username') ? validationErrors.find(e => e.param === 'username').msg : '' %>
+                            <em for="name" class="<%= validations.find(e => e.param === 'username') ? 'invalid' : '' %>">
+                                <%= validations.find(e => e.param === 'username') ? validations.find(e => e.param === 'username').msg : '' %>
                             </em>
                         </section>
                         <section>
-                            <label class="label">Password</label>
-                            <label class="<%= validationErrors.find(e => e.param === 'password') ? 'input state-error' : 'input' %>">
+                            <label class="label"><%= t('auth.login.passwordTitle') %></label>
+                            <label class="<%= validations.find(e => e.param === 'password') ? 'input state-error' : 'input' %>">
                                 <i class="icon-append fa fa-lock"></i>
                                 <input type="password" name="password" value="<%= initInput.password %>"/>
                                 <b class="tooltip tooltip-top-right">
-                                    <i class="fa fa-lock txt-color-teal"></i> Please Enter Password
+                                    <i class="fa fa-lock txt-color-teal"></i> <%= t('auth.login.passwordPopOver') %>
                                 </b>
                             </label>
-                            <em for="password" class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>">
-                                <%= validationErrors.find(e => e.param === 'password') ? validationErrors.find(e => e.param === 'password').msg : '' %>
+                            <em for="password" class="<%= validations.find(e => e.param === 'password') ? 'invalid' : '' %>">
+                                <%= validations.find(e => e.param === 'password') ? validations.find(e => e.param === 'password').msg : '' %>
                             </em>
                         </section>
                     </fieldset>
                     <footer>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary"><%= t('auth.login.pageTitle') %></button>
                     </footer>
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 </form>
@@ -62,6 +85,8 @@
     <%- include('../includes/main-footer.ejs') %>
     
     <script type="text/javascript">
+        const isENLng = "<%= language === 'en' %>" === "true";
+
         runAllForms();
 
         $(function () {
@@ -82,14 +107,14 @@
                 },
                 messages : {
                     username : {
-                        required : 'Username is Required',
-                        minlength : 'Username must be at least 5 characters',
-                        maxlength: 'Username must be maximum 20 characters'
+                        required : isENLng ? 'Username is Required' : 'ต้องกรอกชื่อผู้ใช้',
+                        minlength : isENLng ? 'Username must be at least 5 characters' : 'ชื่อผู้ใช้ต้องมีอย่างน้อย 5 ตัวอักษร',
+                        maxlength: isENLng ? 'Username must be maximum 20 characters' : 'ชื่อผู้ใช้ต้องมีความยาวไม่เกิน 20 ตัวอักษร'
                     },
                     password : {
-                        required : 'Password is Required',
-                        minlength : 'Password must be at least 5 characters',
-                        maxlength: 'Password must be maximum 20 characters'
+                        required : isENLng ? 'Password is Required' : 'ต้องกรอกรหัสผ่าน',
+                        minlength : isENLng ? 'Password must be at least 5 characters' : 'รหัสผ่านต้องมีอย่างน้อย 5 ตัวอักษร',
+                        maxlength: isENLng ? 'Password must be maximum 20 characters' : 'รหัสผ่านต้องมีความยาวไม่เกิน 20 ตัวอักษร'
                     }
                 },
                 errorPlacement : function(error, element) {

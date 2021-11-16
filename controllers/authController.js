@@ -7,8 +7,7 @@ const ErrorLog = require('../models/errorLog');
 exports.getLogin = async (req, res, next) => {
     try {
         res.render('auth/login', {
-            pageTitle: 'Login',
-            validationErrors: [],
+            validations: [],
             mainError: null,
             initInput: { username: '', password: '' }
         });
@@ -26,10 +25,9 @@ exports.postLogin = async (req, res, next) => {
 
         const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
+        if (!errors.isEmpty()) {           
             return res.render('auth/login', {
-                pageTitle: 'Login',
-                validationErrors: errors.errors,
+                validations: errors.errors,
                 mainError: null,
                 initInput: {
                     username: username,
@@ -42,9 +40,8 @@ exports.postLogin = async (req, res, next) => {
 
         if (!queryUser) {
             return res.render('auth/login', {
-                pageTitle: 'Login',
-                validationErrors: [],
-                mainError: 'Login Fail',
+                validations: [],
+                mainError: req.t('auth.login.alertError'),
                 initInput: {
                     username: username,
                     password: password
@@ -56,9 +53,8 @@ exports.postLogin = async (req, res, next) => {
 
         if (!isPasswordMatch) {
             return res.render('auth/login', {
-                pageTitle: 'Login',
-                validationErrors: [],
-                mainError: 'Login Fail',
+                validations: [],
+                mainError: req.t('auth.login.alertError'),
                 initInput: {
                     username: username,
                     password: password
@@ -67,11 +63,9 @@ exports.postLogin = async (req, res, next) => {
         }
 
         req.session.user = queryUser;
+        req.session.lng = req.language;
         req.session.save(async (err) => {
-			if (err) {
-                const log = new ErrorLog({ path: '[POST] /auth/login', errMessage: err.message, errStack: err.stack });
-                await log.save();
-            }
+			if (err) throw err;
 
 			if (queryUser.role === 'admin') res.redirect('/dashboard');
             else res.redirect('/shop');

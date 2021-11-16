@@ -1,7 +1,7 @@
 <aside id="left-panel">
     <div class="login-info">
         <span>              
-            <a href="javascript:void(0);" rel="popover" data-placement="bottom" data-content="<a href='/auth/logout' class='btn btn-danger' style='width:85%;color:#fff;'>Logout</a>" data-html="true">
+            <a href="javascript:void(0);" rel="popover" data-placement="bottom" data-content="<%= `<a href='/auth/logout' class='btn btn-danger' style='width:85%;color:#fff;'>${t('includes.leftNavigation.logout')}</a>` %>" data-html="true">
                 <span class="online" id="user-account-image"><i class="fa fa-user"></i></span>
                 <span><%= user.username %></span>
                 <i class="fa fa-angle-down"></i>
@@ -12,21 +12,21 @@
         <ul>
             <% if (user.role === 'admin') { %>
                 <li class="<%= path === '/dashboard' ? 'active' : '' %>">
-                    <a href="/dashboard" title="Dashboard">
-                        <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span>
+                    <a href="/dashboard" title="<%= t('includes.leftNavigation.dashboardMenu') %>">
+                        <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent"><%= t('includes.leftNavigation.dashboardMenu') %></span>
                     </a>
                 </li>
             <% } %>
 
             <% if (user.role === 'admin') { %>
                 <li class="<%= path.includes('/user-management') ? 'active' : '' %>">
-                    <a href="#"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">User Management</span></a>
+                    <a href="#" title="<%= t('includes.leftNavigation.usermanagementMenu') %>"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent"><%= t('includes.leftNavigation.usermanagementMenu') %></span></a>
                     <ul>
                         <li class="<%= path === '/user-management/all-user' ? 'active' : '' %>">
-                            <a href="/user-management/all-user">All User</a>
+                            <a href="/user-management/all-user" title="<%= t('includes.leftNavigation.allUserMenu') %>"><%= t('includes.leftNavigation.allUserMenu') %></a>
                         </li>
                         <li class="<%= path === '/user-management/add-user' ? 'active' : '' %>">
-                            <a href="/user-management/add-user">Add User</a>
+                            <a href="/user-management/add-user" title="<%= t('includes.leftNavigation.addUserMenu') %>"><%= t('includes.leftNavigation.addUserMenu') %></a>
                         </li>
                     </ul>
                 </li>
