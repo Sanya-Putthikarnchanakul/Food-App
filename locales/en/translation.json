@@ -1,4 +1,12 @@
 {
+    "error": {
+        "pageTitle": "Error",
+        "errorHeader": "Oooops, Something went wrong!",
+        "errorLine1": "You have experienced a technical error. We apologize.",
+        "errorLine2": "We are working hard to correct this issue. Please wait a few moments and try again.",
+        "gotoDashboardBtn": "Go to My Dashboard",
+        "goBack": "Go Back"
+    },
     "includes": {
         "leftNavigation": {
             "logout": "Logout",

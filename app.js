@@ -69,9 +69,7 @@ app.use(indexRoute);
 app.use(async (err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') return res.redirect('/auth/login');
 
-	res.render("error", {
-		pageTitle: 'Error'
-	});
+	res.render("error");
 });
 
 //#endregion
